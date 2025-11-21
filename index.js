@@ -1,10 +1,40 @@
 const baseUrl = 'https://n8n-n8n.8c7vto.easypanel.host/webhook/ipalpha/novos-membros';
+
+function hideLoading() {
+  const loadingScreen = document.getElementById('loading-screen');
+  const formWrapper = document.getElementById('form-wrapper');
+
+  if (loadingScreen) {
+    loadingScreen.classList.add('hidden');
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 500);
+  }
+
+  if (formWrapper) {
+    formWrapper.style.display = 'block';
+  }
+}
+
+function showError(message) {
+  const loadingContent = document.querySelector('.loading-content');
+  if (loadingContent) {
+    loadingContent.innerHTML = `
+      <p style="color: #d32f2f; font-size: 1.2rem; font-weight: 600;">Erro ao carregar</p>
+      <p style="color: #666; margin-top: 0.5rem;">${message}</p>
+    `;
+  }
+}
+
 async function preencherFicha() {
   try {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
 
-    if (!id) throw new Error('ID não fornecido na URL');
+    if (!id) {
+      showError('ID não fornecido na URL');
+      return;
+    }
     console.log('ID:', id);
 
     const url = `${baseUrl}?id=${encodeURIComponent(id)}`;
@@ -73,8 +103,12 @@ async function preencherFicha() {
       img.src = fotoUrl;
     }
 
+    // Esconde o loading e mostra o formulário
+    hideLoading();
+
   } catch (err) {
     console.error('Erro ao preencher a ficha:', err);
+    showError(err.message || 'Erro desconhecido ao carregar os dados');
   }
 }
 document.addEventListener('DOMContentLoaded', preencherFicha);
