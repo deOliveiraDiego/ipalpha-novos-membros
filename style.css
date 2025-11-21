@@ -80,6 +80,15 @@ body {
   text-align: center;
   padding: 0.4rem;
   background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--border-radius);
 }
 
 /* --------- PRÓXIMAS SEÇÕES --------- */
@@ -148,6 +157,11 @@ body {
 /* quando precisar que um campo ocupe a linha toda */
 .field.full {
   flex: 1 1 100%;
+}
+
+/* campo que ocupa ~75% da largura (3 de 4 colunas) */
+.field.field-wide {
+  flex: 1 1 70%;
 }
 
 /* Evita quebra de linha no bloco que receber essa classe */
