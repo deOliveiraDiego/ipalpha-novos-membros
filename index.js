@@ -47,9 +47,45 @@ async function preencherFicha() {
 
     function preencherGrupo(obj) {
       Object.entries(obj).forEach(([key, value]) => {
+        // Status tem tratamento especial com checkboxes
+        if (key === 'relacao_igreja') {
+          marcarStatusCheckbox(value);
+          return;
+        }
+
         const el = document.querySelector(`[data-field="${key}"]`);
         if (el) el.textContent = value?.trim?.() ?? value;
       });
+    }
+
+    function marcarStatusCheckbox(textoStatus) {
+      if (!textoStatus) return;
+
+      const texto = textoStatus.toLowerCase();
+
+      // Mapeia o texto para o checkbox correto
+      let checkboxId = null;
+
+      if (texto.includes('batismo') && texto.includes('profissão de fé')) {
+        checkboxId = 'status-batismo-profissao';
+      } else if (texto.includes('profissão de fé') || texto.includes('profissao de fe')) {
+        checkboxId = 'status-profissao';
+      } else if (texto.includes('batismo infantil') || texto.includes('batizados na infância') || texto.includes('batizados na infancia')) {
+        checkboxId = 'status-batismo-infantil';
+      } else if (texto.includes('transferência') || texto.includes('transferencia') || texto.includes('carta de transferência')) {
+        checkboxId = 'status-transferencia';
+      } else if (texto.includes('membro menor') || texto.includes('menor de idade')) {
+        checkboxId = 'status-menor';
+      } else if (texto.includes('jurisdição') || texto.includes('jurisdicao') || texto.includes('membro')) {
+        checkboxId = 'status-membro';
+      }
+
+      if (checkboxId) {
+        const checkbox = document.getElementById(checkboxId);
+        if (checkbox) {
+          checkbox.checked = true;
+        }
+      }
     }
 
     function transformarLinkDrive(openURL) {

@@ -83,16 +83,16 @@ body {
 .form-header {
   display: flex;
   align-items: center;
-  padding: .5rem .5rem;
+  padding: .3rem .4rem;
   background: var(--brand-yellow);
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 /* Logo à esquerda */
 .logo-box {
-  flex: 0 0 72px;
+  flex: 0 0 55px;
   /* largura fixa p/ logo */
-  height: 72px;
+  height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,33 +100,33 @@ body {
 
 .logo-box img,
 .logo-box .logo-placeholder {
-  max-width: 120px;
-  max-height: 120px;
+  max-width: 90px;
+  max-height: 90px;
 }
 
 /* Título central */
 .form-title {
   flex: 1;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 /* Caixa para foto 3×4 */
 .photo-box {
-  flex: 0 0 100px;
+  flex: 0 0 75px;
   /* largura fixa p/ foto */
-  height: 120px;
+  height: 90px;
   border: 2px solid #fff;
   border-radius: var(--border-radius);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 10px;
   text-align: center;
-  padding: 0.4rem;
+  padding: 0.3rem;
   background: rgba(255, 255, 255, 0.25);
   overflow: hidden;
 }
@@ -226,5 +226,33 @@ body {
 .nowrap .value {
   white-space: nowrap;
   /* impede quebra de linha */
+}
+
+/* --------- CHECKBOXES DE STATUS --------- */
+.status-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.2rem;
+  padding: 0.3rem 0;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 11px;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  cursor: default;
+  pointer-events: none;
+}
+
+.checkbox-item label {
+  cursor: default;
+  user-select: none;
+  white-space: nowrap;
 }
 
