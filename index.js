@@ -119,6 +119,22 @@ async function preencherFicha() {
     if (fotoUrl && img) {
       console.log('Tentando carregar imagem:', fotoUrl);
 
+      let tentativasImagem = 0;
+      const MAX_TENTATIVAS = 3;
+      const fileId = fotoUrl.match(/id=([^&]+)/)?.[1];
+
+      // Função para diagnosticar o erro real
+      async function diagnosticarImagem(url) {
+        console.log('=== DIAGNÓSTICO DE IMAGEM ===');
+        console.log('URL testada:', url);
+        try {
+          const response = await fetch(url, { mode: 'no-cors' });
+          console.log('Fetch no-cors - tipo:', response.type);
+        } catch (error) {
+          console.error('Fetch falhou:', error.name, '-', error.message);
+        }
+      }
+
       img.onload = function() {
         console.log('Imagem carregada com sucesso!');
         img.style.display = 'block';
@@ -126,13 +142,29 @@ async function preencherFicha() {
       };
 
       img.onerror = function() {
-        console.error('Erro ao carregar imagem. Tentando formato alternativo...');
-        // Tenta formato de thumbnail como fallback
-        const id = fotoUrl.match(/id=([^&]+)/)?.[1];
-        if (id) {
-          const thumbnailUrl = `https://drive.google.com/thumbnail?id=${id}&sz=w400`;
-          console.log('Tentando thumbnail:', thumbnailUrl);
-          img.src = thumbnailUrl;
+        tentativasImagem++;
+        console.error(`Tentativa ${tentativasImagem} falhou`);
+
+        // Diagnóstico na última tentativa
+        if (tentativasImagem >= MAX_TENTATIVAS) {
+          console.error('Todas as tentativas de carregar imagem falharam');
+          diagnosticarImagem(img.src);
+          img.style.display = 'none';
+          if (label) label.style.display = 'block';
+          return;
+        }
+
+        if (fileId) {
+          let novaUrl;
+
+          if (tentativasImagem === 1) {
+            novaUrl = `https://drive.google.com/thumbnail?id=${fileId}&sz=w400`;
+          } else if (tentativasImagem === 2) {
+            novaUrl = `https://lh3.googleusercontent.com/d/${fileId}=w400`;
+          }
+
+          console.log(`Tentativa ${tentativasImagem + 1}:`, novaUrl);
+          img.src = novaUrl;
         }
       };
 
