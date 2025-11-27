@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificado de Batismo</title>
+  <link rel="stylesheet" href="certificado-batismo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <img src="https://static.wixstatic.com/media/d17ec4_ee52edbaeb544bfbabf8bc2303e15705~mv2.png"
+           alt="IPALPHA logo"
+           class="loading-logo">
+      <p class="loading-text">Carregando certificado...</p>
+    </div>
+  </div>
+
+  <div class="certificado-wrapper" id="certificado-wrapper" style="display: none;">
+    <div class="conteudo">
+      <p class="nome" data-field="nome"></p>
+      <p class="texto">
+        Certificamos que <span data-field="nome"></span>, tornou-se membro de nossa Igreja (art 16 da constituição da IPB), tendo sido batizado conforme a Palavra de Deus em Mateus 28.19.
+      </p>
+      <p class="data" data-field="data_batismo"></p>
+    </div>
+  </div>
+</body>
+<script src="certificado-batismo.js"></script>
+
+</html>
