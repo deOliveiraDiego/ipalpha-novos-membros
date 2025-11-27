@@ -52,13 +52,21 @@ async function preencherCertificado() {
 
     const { usuario } = await res.json();
 
-    document.querySelectorAll('[data-field="nome"]').forEach(el => {
-      el.textContent = usuario.nome?.trim?.() ?? '';
+    // Preenche todos os campos com data-field
+    document.querySelectorAll('[data-field]').forEach(el => {
+      const field = el.getAttribute('data-field');
+      let value = usuario[field];
+
+      if (value) {
+        el.textContent = typeof value === 'string' ? value.trim() : value;
+      }
     });
 
-    document.querySelectorAll('[data-field="data_batismo"]').forEach(el => {
-      el.textContent = typeof CONFIG !== 'undefined' ? CONFIG.DATA_BATISMO : formatarDataAtual();
-    });
+    // Usa data fixa do CONFIG ou data atual como fallback
+    const dataBatismoEl = document.querySelector('[data-field="data_batismo"]');
+    if (dataBatismoEl) {
+      dataBatismoEl.textContent = typeof CONFIG !== 'undefined' ? CONFIG.DATA_BATISMO : formatarDataAtual();
+    }
 
     hideLoading();
   } catch (err) {

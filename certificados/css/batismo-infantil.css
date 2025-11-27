@@ -55,12 +55,22 @@ html, body {
   }
 }
 
+/* --------- CERTIFICADO --------- */
 .certificado-wrapper {
   width: 100%;
   height: 100%;
   position: relative;
-  background: url('certificado_batismo.png') no-repeat center center;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: cover;
+}
+
+.certificado-wrapper.masculino {
+  background-image: url('../images/certificado_infantil_masculino.png');
+}
+
+.certificado-wrapper.feminino {
+  background-image: url('../images/certificado_infantil_feminino.png');
 }
 
 .conteudo {
@@ -72,37 +82,32 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   box-sizing: border-box;
-  padding-top: 32%;
-}
-
-.nome {
-  font-family: 'Pinyon Script', cursive;
-  font-size: 3.5rem;
-  color: #D4A84B;
-  margin: 0 0 1rem 0;
-  text-align: center;
+  padding: 18% 18% 0 18%;
 }
 
 .texto {
-  font-size: 1.4rem;
+  font-family: 'Allura', cursive;
+  font-size: 2rem;
   color: #333;
-  text-align: justify;
-  max-width: 48%;
+  text-align: center;
   line-height: 1.6;
   margin: 0;
-  padding: 0 1rem;
+  font-weight: 900;
 }
 
-.texto span {
-  font-weight: bold;
+.texto .nome {
+  font-weight: 900;
 }
 
 .data {
-  font-size: 1.4rem;
+  font-family: 'Allura', cursive;
+  font-size: 1.8rem;
   color: #333;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
   text-align: center;
+  font-weight: 900;
 }
 
 /* --------- PRINT STYLES --------- */

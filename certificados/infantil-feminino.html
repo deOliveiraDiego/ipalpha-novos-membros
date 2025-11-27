@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-genero="feminino">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Certificado de Batismo</title>
-  <link rel="stylesheet" href="certificado-batismo.css">
+  <title>Certificado de Batismo Infantil</title>
+  <link rel="stylesheet" href="css/batismo-infantil.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -22,17 +22,18 @@
     </div>
   </div>
 
-  <div class="certificado-wrapper" id="certificado-wrapper" style="display: none;">
+  <div class="certificado-wrapper feminino" id="certificado-wrapper" style="display: none;">
     <div class="conteudo">
-      <p class="nome" data-field="nome"></p>
       <p class="texto">
-        Certificamos que <span data-field="nome"></span>, tornou-se membro de nossa Igreja (art 16 da constituição da IPB), tendo sido batizado conforme a Palavra de Deus em Mateus 28.19.
+        Certificamos que <span class="nome" data-field="nome"></span>, nascida em <span data-field="nascimento"></span>
+        filha de <span data-field="nome_pai"></span> e <span data-field="nome_mae"></span>
+        foi consagrada ao Senhor Jesus Cristo pelo Batismo conforme a Palavra de Deus em Lucas 2:22-23.
       </p>
       <p class="data" data-field="data_batismo"></p>
     </div>
   </div>
 </body>
-<script src="config.js"></script>
-<script src="certificado-batismo.js"></script>
+<script src="../config.js"></script>
+<script src="js/batismo-infantil.js"></script>
 
 </html>
