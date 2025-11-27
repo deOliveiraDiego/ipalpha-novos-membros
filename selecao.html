@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleção de Membros - IPALPHA</title>
+  <link rel="stylesheet" href="selecao.css">
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <img src="https://static.wixstatic.com/media/d17ec4_ee52edbaeb544bfbabf8bc2303e15705~mv2.png"
+           alt="IPALPHA logo"
+           class="loading-logo">
+      <p class="loading-text">Carregando membros...</p>
+    </div>
+  </div>
+
+  <div class="container" id="container" style="display: none;">
+    <header>
+      <img src="https://static.wixstatic.com/media/d17ec4_ee52edbaeb544bfbabf8bc2303e15705~mv2.png"
+           alt="IPALPHA logo"
+           class="logo">
+      <h1>Geração de Documentos em Lote</h1>
+    </header>
+
+    <!-- Filtros -->
+    <section class="filtros">
+      <div class="filtro-grupo">
+        <label for="filtro-nome">Buscar por nome:</label>
+        <input type="text" id="filtro-nome" placeholder="Digite o nome...">
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="filtro-status">Status:</label>
+        <select id="filtro-status">
+          <option value="">Todos</option>
+          <option value="profissao">Profissão de Fé</option>
+          <option value="batismo-infantil">Batismo Infantil</option>
+          <option value="transferencia">Transferência</option>
+          <option value="menor">Membro Menor</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="filtro-idade">Faixa Etária:</label>
+        <select id="filtro-idade">
+          <option value="">Todas</option>
+          <option value="crianca">Criança (0-11)</option>
+          <option value="adolescente">Adolescente (12-17)</option>
+          <option value="adulto">Adulto (18+)</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="tipo-documento">Documento:</label>
+        <select id="tipo-documento">
+          <option value="ficha">Ficha de Membro</option>
+          <option value="declaracao">Declaração</option>
+          <option value="certificado-adulto">Certificado Batismo Adulto</option>
+          <option value="certificado-infantil">Certificado Batismo Infantil</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Ações -->
+    <section class="acoes">
+      <div class="selecao-info">
+        <label class="checkbox-wrapper">
+          <input type="checkbox" id="selecionar-todos">
+          <span>Selecionar todos</span>
+        </label>
+        <span id="contador-selecionados">0 selecionado(s)</span>
+      </div>
+      <button id="btn-gerar" class="btn-gerar" disabled>Gerar Documentos</button>
+    </section>
+
+    <!-- Tabela de Membros -->
+    <section class="tabela-wrapper">
+      <table id="tabela-membros">
+        <thead>
+          <tr>
+            <th class="col-checkbox"></th>
+            <th class="col-roll">Roll</th>
+            <th class="col-nome">Nome</th>
+            <th class="col-nascimento">Nascimento</th>
+            <th class="col-idade">Idade</th>
+            <th class="col-status">Status</th>
+            <th class="col-sexo">Sexo</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-membros">
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+<script src="config.js"></script>
+<script src="cache.js"></script>
+<script src="selecao.js"></script>
+
+</html>

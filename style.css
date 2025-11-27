@@ -289,3 +289,73 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/* --------- MODO LOTE --------- */
+body.modo-lote {
+  overflow: auto;
+  height: auto;
+}
+
+/* No modo lote, cada documento precisa conter seu conteúdo */
+.documento.ficha {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.documento.ficha .photo-box {
+  /* Mantém o estilo mas contido dentro do documento */
+  z-index: 1;
+}
+
+/* --------- PRINT STYLES --------- */
+@media print {
+  @page {
+    margin: 0;
+    size: A4 portrait;
+  }
+
+  html, body {
+    width: 100%;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .loading-screen {
+    display: none !important;
+  }
+
+  .form-wrapper {
+    max-width: none !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
+  /* Modo lote: cada ficha em uma página */
+  .documento.ficha {
+    display: block !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    overflow: hidden !important;
+  }
+
+  .documento.ficha:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  .documento.ficha .photo-box {
+    z-index: 1 !important;
+    position: relative !important;
+  }
+}

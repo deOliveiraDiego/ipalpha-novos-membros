@@ -9,7 +9,17 @@
 </head>
 
 <body>
-  <div class="declaracao-wrapper">
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loading-content">
+      <img src="https://static.wixstatic.com/media/d17ec4_ee52edbaeb544bfbabf8bc2303e15705~mv2.png"
+           alt="IPALPHA logo"
+           class="loading-logo">
+      <p class="loading-text">Carregando declaração...</p>
+    </div>
+  </div>
+
+  <div class="declaracao-wrapper" id="declaracao-wrapper" style="display: none;">
     <div class="conteudo">
       <p>Ao Conselho da IPALPHA</p>
       <p>Eu, <strong data-field="nome"></strong>, DECLARO, como novo membro comungante da Igreja Presbiteriana em
@@ -39,6 +49,8 @@
     </div>
   </div>
 </body>
+<script src="config.js"></script>
+<script src="cache.js"></script>
 <script src="declaracao.js"></script>
 
 </html>

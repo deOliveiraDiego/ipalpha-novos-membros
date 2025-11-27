@@ -44,13 +44,13 @@ async function buscarDadosMembro(id) {
   if (typeof MembrosCache !== 'undefined') {
     const cached = MembrosCache.buscarPorId(id);
     if (cached) {
-      console.log(`[batismo-infantil.js] Membro ${id} encontrado no cache`);
+      console.log(`[batismo-adulto.js] Membro ${id} encontrado no cache`);
       return cached;
     }
   }
 
   // Se não tem no cache, faz request
-  console.log(`[batismo-infantil.js] Buscando membro ${id} da API`);
+  console.log(`[batismo-adulto.js] Buscando membro ${id} da API`);
   const res = await fetch(`${baseUrl}?id=${encodeURIComponent(id)}`);
   if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`);
   return res.json();
@@ -87,21 +87,21 @@ async function preencherCertificado() {
     }
 
     const ids = idParam.split(',').filter(Boolean);
-    console.log('[batismo-infantil.js] IDs para buscar:', ids);
+    console.log('[batismo-adulto.js] IDs para buscar:', ids);
 
     // Busca todos os membros
     const membros = [];
     for (const id of ids) {
       const dados = await buscarDadosMembro(id);
       if (dados) {
-        console.log(`[batismo-infantil.js] Membro ${id} carregado:`, dados.usuario?.nome);
+        console.log(`[batismo-adulto.js] Membro ${id} carregado:`, dados.usuario?.nome);
         membros.push(dados);
       } else {
-        console.warn(`[batismo-infantil.js] Membro ${id} não encontrado`);
+        console.warn(`[batismo-adulto.js] Membro ${id} não encontrado`);
       }
     }
 
-    console.log(`[batismo-infantil.js] Total de membros carregados: ${membros.length}/${ids.length}`);
+    console.log(`[batismo-adulto.js] Total de membros carregados: ${membros.length}/${ids.length}`);
 
     if (membros.length === 0) {
       showError('Nenhum membro encontrado');
@@ -127,11 +127,11 @@ async function preencherCertificado() {
 }
 
 function renderizarMultiplos(membros) {
-  console.log('[batismo-infantil.js] renderizarMultiplos chamado com', membros.length, 'membros');
+  console.log('[batismo-adulto.js] renderizarMultiplos chamado com', membros.length, 'membros');
 
   const wrapper = document.getElementById('certificado-wrapper');
   if (!wrapper) {
-    console.error('[batismo-infantil.js] certificado-wrapper não encontrado!');
+    console.error('[batismo-adulto.js] certificado-wrapper não encontrado!');
     return;
   }
 
@@ -141,12 +141,12 @@ function renderizarMultiplos(membros) {
   // Clona o template original
   const templateOriginal = wrapper.outerHTML;
   const container = wrapper.parentElement;
-  console.log('[batismo-infantil.js] Container:', container.tagName);
+  console.log('[batismo-adulto.js] Container:', container.tagName);
 
   wrapper.remove();
 
   membros.forEach((dados, index) => {
-    console.log(`[batismo-infantil.js] Criando certificado ${index + 1}/${membros.length} para:`, dados.usuario?.nome);
+    console.log(`[batismo-adulto.js] Criando certificado ${index + 1}/${membros.length} para:`, dados.usuario?.nome);
 
     const div = document.createElement('div');
     div.innerHTML = templateOriginal;
@@ -159,7 +159,7 @@ function renderizarMultiplos(membros) {
     container.appendChild(novoWrapper);
   });
 
-  console.log('[batismo-infantil.js] Total de elementos no container:', container.children.length);
+  console.log('[batismo-adulto.js] Total de elementos no container:', container.children.length);
 
   // Adiciona CSS para impressão em lote
   const style = document.createElement('style');
