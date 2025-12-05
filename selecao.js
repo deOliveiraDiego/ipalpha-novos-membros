@@ -187,17 +187,47 @@ function gerarDocumentos() {
     return;
   }
 
-  // Pega os IDs (row_number) dos membros selecionados
+  // CASO ESPECIAL: Certificado Infantil precisa separar por sexo
+  if (tipoDoc === 'certificado-infantil') {
+    const masculinos = [];
+    const femininos = [];
+
+    Array.from(selecionados).forEach(cb => {
+      const tr = cb.closest('tr');
+      const id = tr.dataset.id;
+      const sexo = tr.dataset.sexo;
+
+      if (sexo === 'masculino') {
+        masculinos.push(id);
+      } else if (sexo === 'feminino') {
+        femininos.push(id);
+      }
+    });
+
+    // Abrir janela para masculinos (se houver)
+    if (masculinos.length > 0) {
+      const urlMasc = `certificados/infantil-masculino.html?id=${masculinos.join(',')}`;
+      window.open(urlMasc, '_blank');
+    }
+
+    // Abrir janela para femininos (se houver)
+    if (femininos.length > 0) {
+      const urlFem = `certificados/infantil-feminino.html?id=${femininos.join(',')}`;
+      window.open(urlFem, '_blank');
+    }
+
+    return;
+  }
+
+  // LÓGICA NORMAL para outros documentos
   const ids = Array.from(selecionados)
     .map(cb => cb.closest('tr').dataset.id)
     .join(',');
 
-  // Mapeia tipo de documento → página original
   const paginas = {
     'ficha': 'index.html',
     'declaracao': 'declaracao.html',
-    'certificado-adulto': 'certificados/adulto.html',
-    'certificado-infantil': 'certificados/infantil-feminino.html' // TODO: separar por sexo se necessário
+    'certificado-adulto': 'certificados/adulto.html'
   };
 
   const url = `${paginas[tipoDoc]}?id=${ids}`;
